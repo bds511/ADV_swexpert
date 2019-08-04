@@ -1,6 +1,8 @@
 .env
 cromedriver.exe
 SW_Expert
+.idea
+*.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
