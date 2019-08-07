@@ -40,9 +40,9 @@ class swexpert:
 
 
     def get_url_dict(self):
-        for i in range(2, 18):
+        for i in range(1,2):
             res = requests.get(
-                'https://swexpertacademy.com/main/code/problem/problemList.do?problemTitle=&orderBy=FIRST_REG_DATETIME&select-1=&pageSize=30&pageIndex=' + str(
+                'https://swexpertacademy.com/main/code/problem/problemList.do?problemTitle=&orderBy=FIRST_REG_DATETIME&select-1=&pageSize=10&pageIndex=' + str(
                     i))
             soup = bs(res.content)
 
@@ -55,7 +55,7 @@ class swexpert:
         for key,val in self.url_dict.items():
             my_path = "SW_Expert\\" + key
             if not os.path.exists(my_path):
-                time.sleep(random.random()*3)
+                time.sleep(random.random()*0)
                 self.get_problem("https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId="+val)
 
     def get_problem(self,url):
@@ -69,8 +69,10 @@ class swexpert:
             os.mkdir(my_path)
 
             text = self.browser.find_element_by_class_name("box4")
-            html = self.browser.execute_script("return arguments[0].outerHTML;", text)
-            html += f'<br><strong>[출처]</strong> : {url}'
+            html = self.browser.execute_script("return arguments[0].outerHTML;", text).replace("/main/","https://swexpertacademy.com/main/")
+            html = """<html lang="ko">
+<head><meta charset="utf-8"></head>
+""" + html + f'<br><strong>[출처]</strong> : {url} </html>'
             with open(my_path + "\\problem.html", 'w', encoding='utf-8') as text_file:
                 text_file.write(html)
 
@@ -89,6 +91,8 @@ class swexpert:
 
             copyfile("Templates\\checker.py", my_path + "\\checker.py")
             copyfile("Templates\\problem.py", my_path + "\\problem.py")
+            with open(my_path + "\\checker.py",'a',encoding='utf-8') as text_file:
+                text_file.write('    print("문제출처 : '+url+'")')
             print(title+"다운완료")
 
 
