@@ -1,6 +1,9 @@
 # SWexpert Crawler
 
-## 1. 필요한 라이브러리
+## 1. 개요
+SW Expert Academy(https://swexpertacademy.com/main/main.do)의 문제와 샘플 인풋, 아웃풋을 다운받아 IDE에서도 문제를 쉽게 풀고 결과를 확인 할 수 있게 해 줍니다.
+
+## 2. 필요한 라이브러리
 
 selenium
 decouple
@@ -8,7 +11,7 @@ requests
 
 
 
-## 2. 사용방법
+## 3. 사용방법
 
 해당폴더에 크롬 버전에 맞는 크롬드라이버를 넣으세요.
 
